@@ -22,6 +22,16 @@ export function AppProvider({ children }) {
   const [examResult1, setExamResult1] = useState('');
   const [examResult2, setExamResult2] = useState('');
 
+  // Trạng thái cho tab Grade
+  const [examFile, setExamFile] = useState(null);
+  const [submissionFiles, setSubmissionFiles] = useState([]);
+  const [gradeModel1, setGradeModel1] = useState('');
+  const [gradeModel2, setGradeModel2] = useState('');
+  const [loadingGradeModel1, setLoadingGradeModel1] = useState(false);
+  const [loadingGradeModel2, setLoadingGradeModel2] = useState(false);
+  const [gradeResult1, setGradeResult1] = useState('');
+  const [gradeResult2, setGradeResult2] = useState('');
+
   const value = {
     syllabusFile,
     setSyllabusFile,
@@ -52,7 +62,23 @@ export function AppProvider({ children }) {
     examResult1,
     setExamResult1,
     examResult2,
-    setExamResult2
+    setExamResult2,
+    examFile,
+    setExamFile,
+    submissionFiles,
+    setSubmissionFiles,
+    gradeModel1,
+    setGradeModel1,
+    gradeModel2,
+    setGradeModel2,
+    loadingGradeModel1,
+    setLoadingGradeModel1,
+    loadingGradeModel2,
+    setLoadingGradeModel2,
+    gradeResult1,
+    setGradeResult1,
+    gradeResult2,
+    setGradeResult2
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

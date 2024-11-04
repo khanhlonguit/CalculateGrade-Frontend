@@ -8,7 +8,9 @@ import axios from 'axios';
 function SyllabusTab() {
   const { 
     syllabusFile, 
-    setSyllabusFile, 
+    setSyllabusFile,
+    syllabusModel1,
+    syllabusModel2,
     setLoadingModel1,
     setLoadingModel2,
     setModel1Result, 
@@ -25,7 +27,7 @@ function SyllabusTab() {
       return;
     }
 
-    if (!selectedModel) {
+    if (!syllabusModel1 || !syllabusModel2) {
       alert('Vui lòng chọn model trước khi tạo kết quả.');
       return;
     }

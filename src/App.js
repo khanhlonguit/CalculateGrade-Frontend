@@ -5,6 +5,7 @@ import SyllabusTab from './components/SyllabusTab';
 import ExamCreation from './components/ExamCreation';
 import { AppProvider } from './context/AppContext';
 import './App.css';
+import GradeTab from './components/GradeTab';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
             <h1 className="text-4xl font-bold mb-6 text-center text-gray-800">Hệ thống Hỗ trợ Giảng dạy</h1>
             <NavigationBar />
             <Routes>
-              <Route path="/grade" element={<div>Nội dung chấm bài</div>} />
+              <Route path="/grade" element={<GradeTab />} />
               <Route path="/syllabus" element={<SyllabusTab />} />
               <Route path="/exam" element={<ExamCreation />} />
               <Route path="/" element={<Navigate to="/syllabus" replace />} />

@@ -1,11 +1,15 @@
 import React from 'react';
 import { FaCloudUploadAlt, FaFileAlt } from 'react-icons/fa';
 
-function FileUpload({ onFileUpload, file, label }) {
+function FileUpload({ onFileUpload, file, label, multiple = false, id }) {
   const handleFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      onFileUpload(selectedFile);
+    const selectedFiles = e.target.files;
+    if (selectedFiles) {
+      if (multiple) {
+        onFileUpload(Array.from(selectedFiles));
+      } else {
+        onFileUpload(selectedFiles[0]);
+      }
     }
   };
 
@@ -18,23 +22,33 @@ function FileUpload({ onFileUpload, file, label }) {
             type="file"
             onChange={handleFileChange}
             className="hidden"
-            id="file-upload"
+            id={`file-upload-${id}`}
+            multiple={multiple}
           />
           <label
-            htmlFor="file-upload"
+            htmlFor={`file-upload-${id}`}
             className="cursor-pointer flex items-center justify-center w-full p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
           >
             <FaCloudUploadAlt className="h-5 w-5 mr-2" />
-            Chọn file
+            Chọn file{multiple ? 's' : ''}
           </label>
         </div>
       </div>
       {file && (
         <div className="mt-4 p-3 bg-blue-100 rounded-lg max-w-md">
-          <p className="text-sm text-blue-800 flex items-center">
-            <FaFileAlt className="h-5 w-5 mr-2 flex-shrink-0" />
-            <span className="truncate">{file.name}</span>
-          </p>
+          {multiple ? (
+            file.map((f, index) => (
+              <p key={index} className="text-sm text-blue-800 flex items-center mb-1">
+                <FaFileAlt className="h-5 w-5 mr-2 flex-shrink-0" />
+                <span className="truncate">{f.name}</span>
+              </p>
+            ))
+          ) : (
+            <p className="text-sm text-blue-800 flex items-center">
+              <FaFileAlt className="h-5 w-5 mr-2 flex-shrink-0" />
+              <span className="truncate">{file.name}</span>
+            </p>
+          )}
         </div>
       )}
     </div>
